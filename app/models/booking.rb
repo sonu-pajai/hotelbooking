@@ -41,7 +41,7 @@ class Booking < ActiveRecord::Base
   	elsif (rooms = Room.avail_rooms(start_date, last_date, room_type).limit(1)).length > 0
   		room_id = rooms.first.id
 		else
-			errors.add("Rooms are not available #{room_type}")
+			errors.add(:room_type, "Rooms are not available #{room_type}")
 		end
   end
 
