@@ -1,37 +1,37 @@
-        <h1>Booking Form</h1>
+<h1>Booking Form</h1>
 
-          <%= render'shared/errors', ref_obj: @booking %>
-          <%= form_for(@booking) do |f| %>
-            <div class="bnr-one">
-              <div class="bnr-left">
-                <%= f.label :room_type %><br>
-              </div>
-              <div class="bnr-right">
-                <%= f.select :room_type, Booking.room_types %>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="bnr-one">
-              <div class="bnr-left">
-                <p>Check-In</p>
-              </div>
-              <div class="bnr-right">
-                <%= f.date_field :start_date, :id => "datepicker", :type => "text" %>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="bnr-one">
-              <div class="bnr-left">
-                <p>Check-Out</p>
-              </div>
-              <div class="bnr-right">
-                <%= f.date_field :last_date, :id => "datepicker1", :type => "text" %>
-              </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="bnr-btn">
-              <%= f.submit %>
-            </div>
+<%= render'shared/errors', ref_obj: @booking %>
+<%= form_for(@booking) do |f| %>
+  <div class="bnr-one">
+    <div class="bnr-left">
+      <%= f.label :room_type %><br>
+    </div>
+    <div class="bnr-right">
+      <%= f.select :room_type, Booking.room_types %>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="bnr-one">
+    <div class="bnr-left">
+      <p>Check-In</p>
+    </div>
+    <div class="bnr-right">
+      <%= f.date_field :start_date, :id => "datepicker", :type => "text" %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="bnr-one">
+    <div class="bnr-left">
+      <p>Check-Out</p>
+    </div>
+    <div class="bnr-right">
+      <%= f.date_field :last_date, :id => "datepicker1", :type => "text" %>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div class="bnr-btn">
+    <%= f.submit %>
+  </div>
           <% end %>
         </div>
       </div>
