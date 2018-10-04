@@ -1,0 +1,25 @@
+<div id="wrap">
+  <div id="main" class="container clear-top">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Room No</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Show <th>
+        </tr>
+      </thead>
+      <% @bookings.each do |booking|%>
+        <tr>
+          <td> <%= booking.user.email %></td>
+          <td> <%= link_to booking.room.room_no, booking %> </td>
+          <td> <%= booking.start_date %></td>
+          <td> <%= booking.last_date%></td>
+          <td> <%= link_to "show", booking %> </td>
+        </tr>  
+      <%end%>
+    </table>
+    <%=will_paginate @bookings%>
+  </div>
+</div>

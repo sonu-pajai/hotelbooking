@@ -1,0 +1,18 @@
+<div class="header" id="home">
+  <div class="container">
+    <div class="head">
+      <div class="logo" class="nav-menu-title">
+        <h4>
+          <a href="/" class="nav-menu-title">Home</a> | 
+          <a href="/rooms" class="nav-menu-title">Rooms</a>
+          <% if user_signed_in? %>
+          | <%= link_to 'Bookings', bookings_path,class: "nav-menu-title" %>
+          | <%= link_to 'Logout', destroy_user_session_path, class: "nav-menu-title", method: :delete %>
+          <% else %>
+          | <a href="/users/sign_in" class="nav-menu-title">Login</a>
+          <% end %>
+        </h4>
+      </div>
+    </div>
+  </div>
+</div>  

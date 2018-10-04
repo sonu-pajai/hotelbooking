@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hotel Booking</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag("application") %>
+  <%= javascript_include_tag("jquery.flexslider")%>
+  <%= csrf_meta_tags %>
+
+	<title>Hotel Booking</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!---- start-smoth-scrolling---->
+
+	<script type="text/javascript">
+	      jQuery(document).ready(function($) {
+	        $(".scroll").click(function(event){   
+	          event.preventDefault();
+	          $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+	        });
+	      });
+	    </script>
+	<!--start-smoth-scrolling-->
+</head>
+<body>
+  <%= render "shared/menu" %>
+	<%= yield %>
+  <%= render "shared/footer"%>
+</body>
+</html>
