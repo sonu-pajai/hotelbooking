@@ -1,33 +1,34 @@
 class Booking < ActiveRecord::Base
 
-	enum room_type: ["Deluxe Rooms", "Luxury Rooms", "Luxury suites", "Presidential Suites"]
+  enum room_type: ["Deluxe Rooms", "Luxury Rooms", "Luxury suites","Presidential Suites"]
 
-	belongs_to :room
+  belongs_to :room
   belongs_to :user
 
-  before_validation :check_room_availability
+  before_validation :check_rooms_availability
 
-	validate :validate_dates
+  validate :validate_dates
   validates :user_id, :start_date, :last_date, presence: true
   validates_format_of :start_date, :last_date, :with => /\d{4}\-\d{2}\-\d{2}/, :message => "^Date must be in the following format: mm/dd/yyyy"
 
 
   def validate_dates 
-    if date_is_blank?
+    if dates_is_blank?
       return true
     elsif Date.today > start_date.to_date
-      errors.add(:start_date, "Invalid check in date")
-
+      errors.add(:start_date, "check in date should be greater or equal to today's date")
+    # last_date should be smaller than 6 months
     elsif Date.today + 6.months < last_date.to_date 
-      errors.add(:last_date, "Check out date should be within 6 months")
-   
+      errors.add(:last_date, "Check out date should be smaller than 6 months")
+    # last_date should be greater than start_date
     elsif last_date.to_date < start_date.to_date
-      errors.add(:last_date, "Invalid check out")
+      errors.add(:last_date, "check out date should be greater than Check in Date")
     end
   end
 
-	# get the all the room_id which room are booked in between start_date and last_date
+  # get the all the room_id which room are booked in between start_date and last_date
   def self.excluded_id(start_date,last_date)
+    # if array is empty return  true else return the array
     if (b= Booking.where("Date(start_date) < ? AND Date(last_date) > ? ", last_date,start_date).collect(&:room_id)).empty?
       return false
     else
@@ -35,17 +36,19 @@ class Booking < ActiveRecord::Base
     end
   end
 
-  def check_room_availability
-    if date_is_blank?
+  def check_rooms_availability
+    if dates_is_blank?
       return true
-  	elsif (rooms = Room.avail_rooms(start_date, last_date, room_type).limit(1)).length > 0
-  		room_id = rooms.first.id
-		else
-			errors.add(:room_type, "Rooms are not available #{room_type}")
-		end
+    # last_date should be smaller than 6 months
+    elsif (rooms = Room.avail_rooms(start_date, last_date, room_type).limit(1)).length > 0
+      self.room_id = rooms.first.id
+    else
+
+      errors.add(:room_type, "Rooms are not available #{room_type}")
+    end
   end
 
-  def date_is_blank?
+  def dates_is_blank?
     if start_date.blank? || last_date.blank?
       return true
     end

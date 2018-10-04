@@ -23,6 +23,9 @@ ActiveRecord::Schema.define(version: 20181002085446) do
     t.datetime "updated_at",           null: false
   end
 
+  add_index "bookings", ["room_id"], name: "index_bookings_on_room_id", using: :btree
+  add_index "bookings", ["room_type"], name: "index_bookings_on_room_type", using: :btree
+
   create_table "rooms", force: :cascade do |t|
     t.string   "room_no",    limit: 255
     t.integer  "price",      limit: 4

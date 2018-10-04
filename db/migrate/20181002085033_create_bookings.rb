@@ -9,7 +9,7 @@ class CreateBookings < ActiveRecord::Migration
 
       t.timestamps null: false
     end
-    add_index :users, :room_type
-    add_index :users, :room_id
+    add_index :bookings, :room_type
+    add_index :bookings, :room_id
   end
 end
